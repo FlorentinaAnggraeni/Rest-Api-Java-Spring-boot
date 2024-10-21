@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>New Order</title>
+</head>
+<body>
+    <h1>Create New Order</h1>
+    <form action="#" th:action="@{/order/save}" th:object="${order}" method="post">
+        <label for="quantity">Quantity:</label>
+        <input type="number" th:field="*{quantity}" required /><br />
+        
+        <label for="customerId">Customer:</label>
+        <select th:field="*{customer.id}">
+            <option th:each="customer : ${customers}" th:value="${customer.id}" th:text="${customer.name}"></option>
+        </select><br />
+        
+        <label for="productId">Product:</label>
+        <select th:field="*{product.id}">
+            <option th:each="product : ${products}" th:value="${product.id}" th:text="${product.name}"></option>
+        </select><br />
+
+        <button type="submit">Save</button>
+    </form>
+    <a href="/orders">Back to Orders</a>
+</body>
+</html>

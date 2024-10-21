@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+ <title>Product Form</title>
+</head>
+<body>
+ <h1>Product Form</h1>
+ <!-- Form untuk menambahkan/mengedit produk -->
+ <form th:action="@{/product/save}"
+th:object="${product}" method="post">
+ <!-- Input untuk ID produk (hidden) -->
+ <input type="hidden" th:field="*{id}">
+ <!-- Input untuk nama produk -->
+ <label>Name:</label>
+ <input type="text" th:field="*{name}"
+placeholder="Product Name" required>
+ <br>
+ <!-- Input untuk harga produk -->
+ <label>Price:</label>
+ <input type="number" th:field="*{price}"
+placeholder="Product Price" step="0.01" required>
+ <br>
+ <!-- Submit button -->
+ <button type="submit">Save Product</button>
+ </form>
+</body>
+</html>
