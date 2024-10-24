@@ -5,15 +5,34 @@
     <style>
         table {
             border-collapse: collapse;
-            width: 100%; /* Atur lebar tabel sesuai kebutuhan */
+            width: 100%;
         }
         th, td {
-            border: 1px solid black; /* Tambahkan border ke sel */
-            padding: 8px; /* Tambahkan padding untuk estetika */
-            text-align: left; /* Atur rata kiri untuk sel */
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
         }
         th {
-            background-color: #f2f2f2; /* Tambahkan warna latar untuk header */
+            background-color: #f2f2f2;
+        }
+        /* Styling tombol edit dan delete */
+        .btn {
+            padding: 5px 10px;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+        .btn-edit {
+            background-color: blue;
+        }
+        .btn-delete {
+            background-color: red;
+        }
+        .btn-edit:hover {
+            background-color: darkblue;
+        }
+        .btn-delete:hover {
+            background-color: darkred;
         }
     </style>
 </head>
@@ -21,16 +40,30 @@
     <h1>Product List</h1>
     <a href="/product/new">Add New Product</a>
     <table>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Price</th>
-        </tr>
-        <tr th:each="product : ${products}">
-            <td th:text="${product.id}"></td>
-            <td th:text="${product.name}"></td>
-            <td th:text="${product.price}"></td>
-        </tr>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Actions</th> <!-- Kolom tambahan untuk aksi -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="product : ${products}">
+                <td th:text="${product.id}"></td>
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.price}"></td>
+                <td>
+                    <a th:href="@{/product/edit/{id}(id=${product.id})}">
+                        <button class="btn btn-edit">Edit</button>
+                    </a>
+                    <a th:href="@{/product/delete/{id}(id=${product.id})}" 
+                       onclick="return confirm('Yakin nih, mau dihapus?');">
+                        <button class="btn btn-delete">Delete</button>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
     </table>
 </body>
 </html>
